@@ -3,9 +3,9 @@
 # nix-build -E 'with import <nixpkgs> {}; import ./nix-utils/hackageSources.nix { inherit pkgs ; ghc = haskellPackages.ghc; }'
 # nix-build -E 'with import <nixpkgs> {}; import ./nix-utils/hackageSources.nix { inherit pkgs ; ghc = haskell.compiler.ghc844; }'
 # obelisk project (root):
-# nix-build -E 'with import ./. {}; import ./nix-utils/hackageSources.nix { pkgs = reflex.nixpkgs; ghc = ghc.ghc; }'
+# nix-build -E 'with import ./. {}; import ./nix-utils/hackageSources.nix { pkgs = obelisk.nixpkgs; ghc = ghc.ghc; }'
 { pkgs ? import <nixpkgs> {}
-, ghc ? pkgs.haskellPackages.ghc.name
+, ghc  ? pkgs.haskellPackages.ghc # **This default is wrong for obelisk projects!**
 } :
 let
   libDir = builtins.readDir "${ghc.outPath}/lib/${ghc.name}";
